@@ -1,4 +1,4 @@
-print("welcome to client-server weather testing")
+print("Welcome to client-server weather testing, where the magic happens!")
 
 from weather_client import run_this_file
 import numpy as np
