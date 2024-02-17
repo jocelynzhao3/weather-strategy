@@ -1,0 +1,15 @@
+COPYING
+README.md
+setup.py
+solarpy/__init__.py
+solarpy/pvpanel.py
+solarpy/radiation.py
+solarpy/utils.py
+solarpy.egg-info/PKG-INFO
+solarpy.egg-info/SOURCES.txt
+solarpy.egg-info/dependency_links.txt
+solarpy.egg-info/requires.txt
+solarpy.egg-info/top_level.txt
+tests/test_pvpanel.py
+tests/test_radiation.py
+tests/test_utils.py
