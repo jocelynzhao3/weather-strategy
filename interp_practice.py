@@ -1,4 +1,5 @@
 print("welcome to interpolation practice!")
+print("why does pandas not work arghhh")
 
 from scipy.interpolate import LinearNDInterpolator
 import numpy as np
