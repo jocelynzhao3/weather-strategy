@@ -118,12 +118,3 @@ if __name__ == "__main__":
         receive_json_from_server(input_string)
 
     # basic functionality works, next step: CALC RADIANCE FOR EACH POINT AND WRITE THIS (MORE USEFUL) DATA INTO CSV
-
-
-
-'''
-Many potential bugs:
-1. server must close before used again (how to open server when needed?)
-2. How to catch errors.....
-
-'''
