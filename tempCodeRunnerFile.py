@@ -1,2 +1,0 @@
-
-        b = time.time()
