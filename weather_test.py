@@ -247,7 +247,7 @@ class SolarInterpolator:
         data = pd.read_csv(csv_file_path)
 
         # Extract every nth row of data, can be changed
-        data_subset = data.iloc[::3, :]  # the larger to value, to faster and potentially more inaccurate
+        data_subset = data.iloc[::10, :]  # the larger to value, to faster and potentially more inaccurate
         self.points = data_subset.iloc[:, :3].values
         self.output_values = data_subset.iloc[:, 3].values
         b = time.time()
@@ -261,6 +261,14 @@ class SolarInterpolator:
         plots and shows graph
         return nothing
         '''
+        csv_file_path = self.output_file_path
+        data = pd.read_csv(csv_file_path)
+
+        # Extract every nth row of data, can be changed
+        data_subset = data.iloc[::10, :]  # the larger to value, to faster and potentially more inaccurate
+        self.points = data_subset.iloc[:, :3].values
+        self.output_values = data_subset.iloc[:, 3].values
+
         fig = plt.figure()           # Create a 3D scatter plot
         ax = fig.add_subplot(111, projection='3d')
 

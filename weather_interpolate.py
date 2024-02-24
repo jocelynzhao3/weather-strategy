@@ -2,12 +2,15 @@ from weather_test import SolarInterpolator
 
 #User POV:
 instance = SolarInterpolator("FULL_race_tester.csv", "final_radiance.csv", 16, 24, 2, 2024)   #hour, day, month, year
+instance.graph_interpolation()
 lat_list = [40.8, 40.7, 41.0, 41.8]
 lon_list = [-98.3, -99.1,-100.4, -103.7]
 hours_passed_list = [2, 20, 12, 24]
 # if write_csv is true, remember to activate conda and weather_server.py
-radiance_list = instance.interpolate_radiance(lat_list, lon_list, hours_passed_list, write_csv=False)
-print(radiance_list)
+# radiance_list = instance.interpolate_radiance(lat_list, lon_list, hours_passed_list, write_csv=False)
+# print(radiance_list)
+
+
 
 '''
 Notes:
