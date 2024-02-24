@@ -9,10 +9,9 @@ from mpl_toolkits.mplot3d import Axes3D
 
 
 # Next steps:
-# do interpolation (try linear interpolation and grid data) - will take a long time
 # make interpolation function
-# try graphing them for pretty images??
 # how to get stuff into MIT SEVT github?
+# try a server-client with another machine
 
 # Read CSV file
 csv_file_path = 'final_radiance.csv'
