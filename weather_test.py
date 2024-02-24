@@ -152,7 +152,7 @@ def write_all_to_csv(file_path = "2022_C_tester.csv"):
     final_csv = "final_radiance.csv"    #we will interpolate on this csv
 
     # Specify the column headers
-    final_column_headers = ['Lat', 'Lon', 'Hour', 'Day', 'Radiance']
+    final_column_headers = ['Lat', 'Lon', 'Hours since start', 'Radiance']  #DEFINE START
 
     # Writing to CSV file
     with open(final_csv, mode='w', newline='') as file:
@@ -162,6 +162,14 @@ def write_all_to_csv(file_path = "2022_C_tester.csv"):
     print(f'CSV file "{final_csv}" inital creation.')
 
     data_row=[]
+
+    # Get the current date and time
+    current_datetime = datetime.now()   #START = current datetime?
+
+    # Extract individual components
+    current_month = current_datetime.month
+    current_day = current_datetime.day
+    current_hour = current_datetime.hour
 
     a = time.time()
     with open(file_path, 'r', newline='') as csvfile:   #open route csv
@@ -188,13 +196,16 @@ def write_all_to_csv(file_path = "2022_C_tester.csv"):
                     day = int(my_datetime[8:10])
                     hour = int(my_datetime[11:])
 
+
+                    hours_since_start = (day - current_day)*24 + hour - current_hour
+
                     # calculate radiance - clear_sky_radiance and adj_radiance may differ in units (panel power vs solar radiance) - hopefully general trend is ok
                     clear_radiance = clear_sky_radiance(lat, lon, elev, year, month, day, hour, minute=0)
                     cloud_cover = float(cloud_cover)
                     final_radiance = adj_radiance(clear_radiance, cloud_cover)   #float or numpy float
 
                     # write data into final csv
-                    data_row = [lat, lon, hour, day, final_radiance]
+                    data_row = [lat, lon, hours_since_start, final_radiance]
                     with open(final_csv, 'a', newline='') as final_file:   # I choose to open/close/reopen final_csv because it gets very large
                         final_csv_writer = csv.writer(final_file)
                         final_csv_writer.writerow(data_row)
