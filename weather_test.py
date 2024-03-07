@@ -24,7 +24,7 @@ class SolarInterpolator:
         '''
         Param:
         input and output file path strings
-        Starting datetime values (whole ints - rounds any decimals)
+        Starting datetime values (whole ints - round any decimals)
         '''
 
         self.input_file_path = input_coordinate_csv   #  "2022_C_tester.csv"
@@ -337,11 +337,15 @@ if __name__ == "__main__":
 
     # Creating an instance of the class and providing values for initialization
     solar_interp_instance = SolarInterpolator("2022_C_tester.csv", "final_radiance.csv", 15, 24, 2)
-    solar_interp_instance.write_all_to_csv()
-    solar_interp_instance.make_solar_interpolator()
-    # one lat, lon, time:
-    value = solar_interp_instance.get_solar_interpolator(lat, lon, hours_since_start)
-    print("Interpolated value: " + str(value))
+    # solar_interp_instance.write_all_to_csv()
+    # solar_interp_instance.make_solar_interpolator()
+    # # one lat, lon, time:
+    # value = solar_interp_instance.get_solar_interpolator(lat, lon, hours_since_start)
+    # print("Interpolated value: " + str(value))
+
+    print(solar_interp_instance.clear_sky_radiance(lat, lon, 0, 2024, 3, 3, 16, 0))
+    print(solar_interp_instance.clear_sky_radiance(lat, lon, 200, 2024, 3, 3, 16, 0))  #elevation kinda matters
+
 
 
 '''
