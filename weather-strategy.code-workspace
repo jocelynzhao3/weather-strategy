@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"sshfs.configs": [
+			{
+				"name": "jocelyn_athena"
+			},
+			{
+				"name": "jocelyn_2_athena",
+				"host": "athena.dialup.mit.edu",
+				"root": "~/",
+				"username": "jjz300",
+				"terminalCommand": "/usr/bin/bash"
+			}
+		]
+	}
+}
