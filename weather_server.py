@@ -105,7 +105,7 @@ def handle_client(client_socket):
 
     # Close the connection
     client_socket.close()
-    print("socket closed")
+    print("Socket closed")
 
 def start_server():
     # Set up the server
