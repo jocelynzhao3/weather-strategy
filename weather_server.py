@@ -13,7 +13,7 @@ def fetch_webpage_content(url):
         return response.json()  # Assume the content is in JSON format
     else:
         print(f"Failed to fetch content. Status code: {response.status_code}")
-        return None
+
 
 def save_json_to_file(data, filename):
     with open(filename, 'w') as file:
@@ -65,7 +65,7 @@ def write_data_to_dict(lat, lon):
     data = {"bounds" : bounds_list} #write the first line as the bounds
 
     for i in range(len(sky_cover_time_list)):    # may not need to generate entire dictionary to improve efficiency
-        key = sky_cover_dict["properties"]["skyCover"]["values"][i]["validTime"][:13]   #abtract away year
+        key = sky_cover_dict["properties"]["skyCover"]["values"][i]["validTime"][:13]
         value = int(sky_cover_dict["properties"]["skyCover"]["values"][i]["value"])/100  #cloud cover as decimal 0.0-1.0
         data[key] = value
 
@@ -112,6 +112,9 @@ def start_server():
 
         # Handle the client in a separate thread
         handle_client(client_socket)
+
+
+print('hello')
 
 if __name__ == "__main__":
     start_server()

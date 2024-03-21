@@ -13,7 +13,6 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 # Next steps:
-# try doing it all one entire race csv
 # clean up print statements?
 # how to get stuff into MIT SEVT github?
 # try a server-client with another machine
