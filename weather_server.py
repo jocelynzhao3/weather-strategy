@@ -72,15 +72,6 @@ def write_data_to_dict(lat, lon):
     # print("data :" + str(data))
     return data   # data dict
 
-
-
-#lat, lon values will be given by the client
-lat = 42.36
-lon = -71.06
-# write_data_to_dict(lat, lon)   #length < 160, find way to send csv to client
-
-# Online code:
-
 def get_response(data):   #make dictionary from lat/lon points
     lat, lon = data.rsplit(", ")
     lat = float(lat)
@@ -124,3 +115,17 @@ def start_server():
 
 if __name__ == "__main__":
     start_server()
+
+
+
+
+'''
+goal of the server:
+1. input: csv with lat, lon, elev
+2. for every hour over next 7 days, write to multiple lists (csv may not be needed)
+data in order for lat, lon, timestamp - consider using numpy arrays
+    - will still write to cloud cover dict??
+
+3. interpolate over the lists to get an interpolation function
+4. write interpolation function to a file, send this file to the client
+'''
