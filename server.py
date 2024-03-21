@@ -4,12 +4,14 @@ import pandas as pd
 from solarpy import solar_panel
 import csv
 import json
-import requests                    #set base to conda 3.11.5 to install package
+import requests                   #set base to conda 3.11.5 to install package
+import socket
 from datetime import datetime
 import time
 from shapely.geometry import Point
 from shapely.geometry.polygon import Polygon
 from scipy.interpolate import LinearNDInterpolator
+import pickle
 
 
 route_file_name = "2022_C_tester.csv"  #make into constant? or change as needed?
@@ -71,6 +73,12 @@ def save_json_to_file(data, filename):
 
 
 def write_data_to_dict(lat, lon):
+    '''
+    Given lat, lon, grabs hours cloud coverage forecast from internet and
+    organizes into dictionary, along with bounds of this forecast
+
+    Returns data dictionary and bounds list
+    '''
     link = "https://api.weather.gov/points/" + str(lat) + "," + str(lon)
     #example: link = "https://api.weather.gov/points/42.36,-71.06"
 
@@ -170,8 +178,10 @@ def create_data_interpolator(route_file_name):
             lat = float(lat)
             lon = float(lon)
             elev = float(elev)
-            run_this_file(lat, lon, cloud_path)   # ensures local_cloud_cover csv is ready for next steps  #FIX HERE
+            some dict output = run_this_file(lat, lon, cloud_path)   # ensures local_cloud_cover csv is ready for next steps  #FIX HERE
 
+
+            # for this_datetime, cloud_cover in some dict.items():
             with open(cloud_path, 'r', newline='') as cloud_csvfile:   #open cloud csv
                 cloud_csv_reader = csv.reader(cloud_csvfile)
                 next(cloud_csv_reader)    # Skip the first line, which is boundary list
@@ -206,23 +216,66 @@ def create_data_interpolator(route_file_name):
     inc_timestamps = timestamps[::increment]
     inc_radiances = radiances[::increment]
 
+    # fix linear interp syntax
     interp_func = LinearNDInterpolator([inc_lats, inc_lons, inc_timestamps], inc_radiances)
 
     return interp_func
 
 
-def handle_client():
-    # turn interp func into weights, send data to client
-    pass
+def make_interp_file(route_file_name):
+    '''
+    Given route file name, calls interpolator creation function
+    Store interpolator into pickle file
+    Return nothing
+
+    Used when client requests interp function
+    '''
+    interp_func = create_data_interpolator(route_file_name)
+    with open('interpolator.pkl', 'wb') as f:
+        pickle.dump(interp_func, f)
 
 
+def handle_client(client_socket):
+    '''
+    Assume we don't recieve any data from client:
+    Sends pickle file to client
+    '''
+    make_interp_file(route_file_name) #constantly update interp file?
 
+    # does pickle need to be encoded into json?
+
+    client_socket.send(json_response.encode('utf-8'))
+
+    # Close the connection
+    client_socket.close()
+    print("Socket closed")
+
+
+def start_server():
+    # Set up the server
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.bind(('127.0.0.1', 8888))
+    server.listen(1)
+    print("Server listening on port 8888...")
+
+    while True:
+        # Wait for a connection from the client
+        client_socket, client_address = server.accept()
+        print(f"Accepted connection from {client_address}")
+
+        # Handle the client in a separate thread
+        handle_client(client_socket)
+
+    # if client made request:
+        # stop making interp file or finish current interp file?
+        # send over pickle file with func
 
 
 
 if __name__ == "__main__":
     route_file_name = "2022_C_tester.csv"  #make into constant? or change as needed?
     # route_file_name = "FULL_race_tester.csv"
+    start_server()
 
 
 '''
