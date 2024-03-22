@@ -2,6 +2,7 @@ from server import SolarInterpolator
 import socket
 import pickle
 from datetime import datetime
+import time
 from scipy.interpolate import LinearNDInterpolator  #likely still need this
 
 pickle_file_path = 'interp_func.pickle'
@@ -42,7 +43,7 @@ def interpolate(lats, lons, datetimes, update_func=False): #could also be timest
     datetimes: list of datetime objects
     update_func: optional bool to regenerate interpolation function
 
-    return list of corresponding interpolated radiances
+    return list of corresponding interpolated radiances, likely to return nan values
     '''
     timestamps = []
     for datetime in datetimes:
@@ -68,20 +69,34 @@ def interpolate(lats, lons, datetimes, update_func=False): #could also be timest
 
 if __name__ == "__main__":
 
-    datetime_list = [datetime(2024, 3, 21, 18, 56, 19, 273221),
-                     datetime(2024, 3, 22, 18, 56, 19, 273221),
-                     datetime(2024, 3, 23, 18, 56, 19, 273221),
-                     datetime(2024, 3, 24, 18, 56, 19, 273221)]
+    print("in client main")
+    datetime_list = [datetime(2024, 3, 21, 12, 56, 19, 273221),
+                     datetime(2024, 3, 22, 12, 56, 19, 273221),
+                     datetime(2024, 3, 23, 12, 56, 19, 273221),
+                     datetime(2024, 3, 24, 12, 56, 19, 273221)]
 
-    timestamps = []
-    for datetime in datetime_list:
-        timestamps.append(datetime.timestamp()//3600)  #seconds into hours
+    # timestamps = []
+    # for datetime in datetime_list:
+    #     timestamps.append(datetime.timestamp()//3600)  #seconds into hours
 
-    print(timestamps)
-    pass
+    # print(timestamps)
+
+    lats = [40.88492, 41.12062, 41.2394, 41.7951]
+    lons = [-98.3769, -101.3816, -102.0455,-103.537]
+
+    print("radiances: ")
+    a = time.time()
+    print(interpolate(lats, lons, datetime_list, update_func=True))
+    b = time.time()
+    print("full race time " + str(b-a) + " seconds")
+
+
+
+
 
 '''
 client notes:
 1. will have interp function stored as pickle on local
-2. don't forget to add some no-internet intepolation funcs as well
+2. delete unneeded python files
+2. add some no-internet intepolation funcs as well?
 '''

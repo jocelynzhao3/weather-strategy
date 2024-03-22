@@ -42,53 +42,53 @@
             }
         }
     ],
-    "id": "https://api.weather.gov/points/42.3,-71.1",
+    "id": "https://api.weather.gov/points/42.5730999,-114.4798",
     "type": "Feature",
     "geometry": {
         "type": "Point",
         "coordinates": [
-            -71.1,
-            42.3
+            -114.4798,
+            42.5730999
         ]
     },
     "properties": {
-        "@id": "https://api.weather.gov/points/42.3,-71.1",
+        "@id": "https://api.weather.gov/points/42.5730999,-114.4798",
         "@type": "wx:Point",
-        "cwa": "BOX",
-        "forecastOffice": "https://api.weather.gov/offices/BOX",
-        "gridId": "BOX",
-        "gridX": 71,
-        "gridY": 87,
-        "forecast": "https://api.weather.gov/gridpoints/BOX/71,87/forecast",
-        "forecastHourly": "https://api.weather.gov/gridpoints/BOX/71,87/forecast/hourly",
-        "forecastGridData": "https://api.weather.gov/gridpoints/BOX/71,87",
-        "observationStations": "https://api.weather.gov/gridpoints/BOX/71,87/stations",
+        "cwa": "BOI",
+        "forecastOffice": "https://api.weather.gov/offices/BOI",
+        "gridId": "BOI",
+        "gridX": 184,
+        "gridY": 30,
+        "forecast": "https://api.weather.gov/gridpoints/BOI/184,30/forecast",
+        "forecastHourly": "https://api.weather.gov/gridpoints/BOI/184,30/forecast/hourly",
+        "forecastGridData": "https://api.weather.gov/gridpoints/BOI/184,30",
+        "observationStations": "https://api.weather.gov/gridpoints/BOI/184,30/stations",
         "relativeLocation": {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    -71.142003,
-                    42.323853
+                    -114.464073,
+                    42.563123
                 ]
             },
             "properties": {
-                "city": "Brookline",
-                "state": "MA",
+                "city": "Twin Falls",
+                "state": "ID",
                 "distance": {
                     "unitCode": "wmoUnit:m",
-                    "value": 4354.7341265569
+                    "value": 1699.8427887666
                 },
                 "bearing": {
                     "unitCode": "wmoUnit:degree_(angle)",
-                    "value": 127
+                    "value": 310
                 }
             }
         },
-        "forecastZone": "https://api.weather.gov/zones/forecast/MAZ015",
-        "county": "https://api.weather.gov/zones/county/MAC025",
-        "fireWeatherZone": "https://api.weather.gov/zones/fire/MAZ015",
-        "timeZone": "America/New_York",
-        "radarStation": "KBOX"
+        "forecastZone": "https://api.weather.gov/zones/forecast/IDZ016",
+        "county": "https://api.weather.gov/zones/county/IDC083",
+        "fireWeatherZone": "https://api.weather.gov/zones/fire/IDZ426",
+        "timeZone": "America/Boise",
+        "radarStation": "KSFX"
     }
 }

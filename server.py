@@ -1,6 +1,5 @@
 import numpy as np
 from numpy import array
-import pandas as pd
 from solarpy import solar_panel
 import csv
 import json
@@ -65,6 +64,7 @@ class SolarInterpolator:
 
         # Check if the request was successful (status code 200)
         if response.status_code == 200:
+            print("fetch worked")
             return response.json()  # Assume the content is in JSON format
         else:
             print(f"Failed to fetch content. Status code: {response.status_code}")
@@ -180,7 +180,7 @@ class SolarInterpolator:
                     month = int(this_datetime[5:7])
                     day = int(this_datetime[8:10])
                     hour = int(this_datetime[11:])
-                    this_datetime_obj = datetime.datetime(year, month, day, hour)
+                    this_datetime_obj = datetime(year, month, day, hour)
                     this_timestamp = this_datetime_obj.timestamp()/3600  #seconds into hours
 
                     # calculate radiance
@@ -195,7 +195,7 @@ class SolarInterpolator:
                     radiances.append(final_radiance)
 
         # make interpolator:
-        increment = 10 # prevent interp errors
+        increment = 60 # prevent interp errors
         inc_lats = lats[::increment]
         inc_lons = lons[::increment]
         inc_timestamps = timestamps[::increment]
@@ -213,8 +213,8 @@ def start_server():
     server.listen(1)
     print("Server listening on port 8888...")
 
-    route_file_name = "2022_C_tester.csv"  #make constant or change as needed?
-    # route_file_name = "FULL_race_tester.csv"
+    # route_file_name = "2022_C_tester.csv"  #make constant or change as needed?
+    route_file_name = "FULL_race_tester.csv"
     interp_obj = SolarInterpolator(route_file_name)
 
     while True:
@@ -222,7 +222,7 @@ def start_server():
         client_socket, client_address = server.accept()
         print(f"Accepted connection from {client_address}")
 
-        function = interp_obj.create_data_interpolator(route_file_name) #constantly update interp file?
+        function = interp_obj.create_data_interpolator()
         serialized_function = pickle.dumps(function)
 
         client_socket.sendall(serialized_function)
@@ -260,4 +260,6 @@ data in order for lat, lon, timestamp - consider using numpy arrays
 4. write interpolation function to a file
 5. repeat on a __ timely basis <-- HOW OFTEN TO REPEAT? OR ONLY RUN WHEN REQUESTED
 6. if client requests it, send this file to the client (don't forget - client changes datetime into timestamp // 3600)
+
+Issues: q hull issues
 '''
