@@ -42,53 +42,53 @@
             }
         }
     ],
-    "id": "https://api.weather.gov/points/41.8214,-103.6845",
+    "id": "https://api.weather.gov/points/42.3,-71.1",
     "type": "Feature",
     "geometry": {
         "type": "Point",
         "coordinates": [
-            -103.6845,
-            41.8214
+            -71.1,
+            42.3
         ]
     },
     "properties": {
-        "@id": "https://api.weather.gov/points/41.8214,-103.6845",
+        "@id": "https://api.weather.gov/points/42.3,-71.1",
         "@type": "wx:Point",
-        "cwa": "CYS",
-        "forecastOffice": "https://api.weather.gov/offices/CYS",
-        "gridId": "CYS",
-        "gridX": 150,
-        "gridY": 42,
-        "forecast": "https://api.weather.gov/gridpoints/CYS/150,42/forecast",
-        "forecastHourly": "https://api.weather.gov/gridpoints/CYS/150,42/forecast/hourly",
-        "forecastGridData": "https://api.weather.gov/gridpoints/CYS/150,42",
-        "observationStations": "https://api.weather.gov/gridpoints/CYS/150,42/stations",
+        "cwa": "BOX",
+        "forecastOffice": "https://api.weather.gov/offices/BOX",
+        "gridId": "BOX",
+        "gridX": 71,
+        "gridY": 87,
+        "forecast": "https://api.weather.gov/gridpoints/BOX/71,87/forecast",
+        "forecastHourly": "https://api.weather.gov/gridpoints/BOX/71,87/forecast/hourly",
+        "forecastGridData": "https://api.weather.gov/gridpoints/BOX/71,87",
+        "observationStations": "https://api.weather.gov/gridpoints/BOX/71,87/stations",
         "relativeLocation": {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    -103.664865,
-                    41.827518
+                    -71.142003,
+                    42.323853
                 ]
             },
             "properties": {
-                "city": "Gering",
-                "state": "NE",
+                "city": "Brookline",
+                "state": "MA",
                 "distance": {
                     "unitCode": "wmoUnit:m",
-                    "value": 1763.4869340721
+                    "value": 4354.7341265569
                 },
                 "bearing": {
                     "unitCode": "wmoUnit:degree_(angle)",
-                    "value": 247
+                    "value": 127
                 }
             }
         },
-        "forecastZone": "https://api.weather.gov/zones/forecast/NEZ019",
-        "county": "https://api.weather.gov/zones/county/NEC157",
-        "fireWeatherZone": "https://api.weather.gov/zones/fire/NEZ436",
-        "timeZone": "America/Denver",
-        "radarStation": "KCYS"
+        "forecastZone": "https://api.weather.gov/zones/forecast/MAZ015",
+        "county": "https://api.weather.gov/zones/county/MAC025",
+        "fireWeatherZone": "https://api.weather.gov/zones/fire/MAZ015",
+        "timeZone": "America/New_York",
+        "radarStation": "KBOX"
     }
 }

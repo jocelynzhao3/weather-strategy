@@ -1,54 +1,87 @@
+from server import SolarInterpolator
 import socket
 import pickle
+from datetime import datetime
 from scipy.interpolate import LinearNDInterpolator  #likely still need this
 
+pickle_file_path = 'interp_func.pickle'
 
-# IDK if you still need this - pickle for interp function is likely short
-def receive_all_data(client_socket):    #need to split up into chunks as string is too big
-    data = b''
-    while True:
-        chunk = client_socket.recv(1024)
-        if not chunk:
-            break
-        data += chunk
-    return data.decode('utf-8')
-
-
-def receive_json_from_server(data):
+def receive_func_from_server():
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect(('127.0.0.1', 8888))
 
-    # Send the string to the server
-    client.send(data.encode('utf-8'))   # what is data> should be nothing
+    received_data = b''  # Initialize an empty byte string to store received data
+    buffer_size = 1024   # Set a smaller buffer size
 
-    json_response = receive_all_data(client)
+    # Loop to receive data until no more data is available
+    while True:
+        chunk = client.recv(buffer_size)  # Receive a chunk of data
+        if not chunk:
+            break  # Break the loop when no more data is received
+        received_data += chunk  # Append the received chunk to the data buffer
 
-    response_dict = json.loads(json_response) #load in pickle
+    # Deserialize the function
+    received_function = pickle.loads(received_data)
 
-    client.close()
+    # Save the received function to a pickle file
+    try:
+        with open(pickle_file_path, 'wb') as file:
+            pickle.dump(received_function, file)
+        print(f"Function saved to '{pickle_file_path}'")
+    except FileNotFoundError:
+        print(f"Error: File '{pickle_file_path}' not found.")
 
-    with open('interpolator.pkl', 'rb') as f:
-        interpolator_loaded = pickle.load(f)
+    client.close()  # Close the socket
 
 
-def interpolate(lats, lons, datetimes?, update_func=False): # list of datetimes can also be list of timestamps
+def interpolate(lats, lons, datetimes, update_func=False): #could also be timestamps
     '''
     lists should all be the same length
+    lats: list of floats
+    lons: list of floats
+    datetimes: list of datetime objects
+    update_func: optional bool to regenerate interpolation function
 
     return list of corresponding interpolated radiances
     '''
+    timestamps = []
+    for datetime in datetimes:
+        timestamps.append(datetime.timestamp()//3600)  #seconds into hours
 
-    if update_func or no interpolator:
-        receive_json_from_server()
-    else:
-        somehow grab interp function
+    if update_func:
+        interp = receive_func_from_server()   #store stuff into a pickle file
 
-    with open('interpolator.pkl', 'rb') as f:
-        interpolator_loaded = pickle.load(f)
+    try:
+        with open(pickle_file_path, 'rb') as file:
+            loaded_function = pickle.load(file)
+    except FileNotFoundError:
+        print(f"Error: File '{pickle_file_path}' not found, set update_func as True!")
+        return None
 
-
+    # need to save interp function
     requested_rads = []
     for i in range(len(lats)):
-        requested_rads.append(requested_rads(lats[i], lons[i], timestamps[i]))
+        requested_rads.append(loaded_function(lats[i], lons[i], timestamps[i]))
 
     return requested_rads
+
+
+if __name__ == "__main__":
+
+    datetime_list = [datetime(2024, 3, 21, 18, 56, 19, 273221),
+                     datetime(2024, 3, 22, 18, 56, 19, 273221),
+                     datetime(2024, 3, 23, 18, 56, 19, 273221),
+                     datetime(2024, 3, 24, 18, 56, 19, 273221)]
+
+    timestamps = []
+    for datetime in datetime_list:
+        timestamps.append(datetime.timestamp()//3600)  #seconds into hours
+
+    print(timestamps)
+    pass
+
+'''
+client notes:
+1. will have interp function stored as pickle on local
+2. don't forget to add some no-internet intepolation funcs as well
+'''
