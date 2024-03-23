@@ -18,6 +18,8 @@ class SolarInterpolator:
         self.route_file_name = route_file_name
         self.bounds_list = [[0, 0], [1, 0], [0, 1], [1, 1], [0, 0]] # useless initial bounds list
         self.cloud_dict = {}
+        self.increment = 5 # prevent interp errors
+
 
     def clear_sky_radiance(self, lat, lon, elev, year, month, day, hour, minute):
         '''
@@ -64,7 +66,7 @@ class SolarInterpolator:
 
         # Check if the request was successful (status code 200)
         if response.status_code == 200:
-            print("fetch worked")
+            # print("fetch worked")
             return response.json()  # Assume the content is in JSON format
         else:
             print(f"Failed to fetch content. Status code: {response.status_code}")
@@ -172,7 +174,6 @@ class SolarInterpolator:
                 elev = float(elev)
                 self.run_this_file(lat, lon)   # ensures cloud_dict is ready for next steps
 
-                # for this_datetime, cloud_cover in some dict.items():
                 for this_datetime, cloud_cover in self.cloud_dict.items():
 
                     # parse my_datetime:
@@ -191,15 +192,15 @@ class SolarInterpolator:
                     # write data into lists
                     lats.append(lat)
                     lons.append(lon)
-                    timestamps.append(this_timestamp)
+                    timestamps.append(this_timestamp*10) # scaling purposes?
                     radiances.append(final_radiance)
 
         # make interpolator:
-        increment = 60 # prevent interp errors
-        inc_lats = lats[::increment]
-        inc_lons = lons[::increment]
-        inc_timestamps = timestamps[::increment]
-        inc_radiances = radiances[::increment]
+        self.increment = 5 # prevent interp errors
+        inc_lats = lats[::self.increment]
+        inc_lons = lons[::self.increment]
+        inc_timestamps = timestamps[::self.increment]
+        inc_radiances = radiances[::self.increment]
 
         points = np.column_stack((inc_lats, inc_lons, inc_timestamps))
         interp_func = LinearNDInterpolator(points, inc_radiances)
@@ -213,9 +214,15 @@ def start_server():
     server.listen(1)
     print("Server listening on port 8888...")
 
-    route_file_name = "2022_C_tester.csv"  #make constant or change as needed?
-    # route_file_name = "FULL_race_tester.csv"
+    # route_file_name = "2022_C_tester.csv"  #make constant or change as needed?
+    route_file_name = "FULL_race_tester.csv"
     interp_obj = SolarInterpolator(route_file_name)
+
+    # while not accepted client:
+        # run create data interpolator
+    # while accepted client:
+        # respond and send datas
+
 
     while True:
         # Wait for a connection from the client
@@ -261,5 +268,9 @@ data in order for lat, lon, timestamp - consider using numpy arrays
 5. repeat on a __ timely basis <-- HOW OFTEN TO REPEAT? OR ONLY RUN WHEN REQUESTED
 6. if client requests it, send this file to the client (don't forget - client changes datetime into timestamp // 3600)
 
-Issues: q hull issues
+Issues: q hull issues - increase increment usually solves the issue
+
+Time considerations (on local machine):
+1. making interp function for full race takes around 30 mins
+2. using interp function on 4 points takes 0.3 sec
 '''

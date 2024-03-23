@@ -47,7 +47,7 @@ def interpolate(lats, lons, datetimes, update_func=False): #could also be timest
     '''
     timestamps = []
     for datetime in datetimes:
-        timestamps.append(datetime.timestamp()//3600)  #seconds into hours
+        timestamps.append(datetime.timestamp()//3600*10)  #seconds into hours, scaling
 
     if update_func:
         interp = receive_func_from_server()   #store stuff into a pickle file
@@ -61,19 +61,25 @@ def interpolate(lats, lons, datetimes, update_func=False): #could also be timest
 
     # need to save interp function
     requested_rads = []
+    a = time.time()
     for i in range(len(lats)):
-        requested_rads.append(loaded_function(lats[i], lons[i], timestamps[i]))
+        requested_rads.append(loaded_function(lats[i], lons[i], timestamps[i])) #first item on numpy array
+    b = time.time()
 
+    for item in requested_rads:
+        print(item)
+
+    print("interp time: " + str(b-a))
     return requested_rads
 
 
 if __name__ == "__main__":
 
     print("in client main")
-    datetime_list = [datetime(2024, 3, 21, 12, 56, 19, 273221),
-                     datetime(2024, 3, 22, 12, 56, 19, 273221),
-                     datetime(2024, 3, 23, 12, 56, 19, 273221),
-                     datetime(2024, 3, 24, 12, 56, 19, 273221)]
+    datetime_list = [datetime(2024, 3, 23, 12, 56, 19, 273221),
+                     datetime(2024, 3, 24, 12, 56, 19, 273221),
+                     datetime(2024, 3, 25, 12, 56, 19, 273221),
+                     datetime(2024, 3, 26, 12, 56, 19, 273221)]
 
     # timestamps = []
     # for datetime in datetime_list:
