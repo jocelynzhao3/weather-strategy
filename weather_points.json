@@ -42,53 +42,53 @@
             }
         }
     ],
-    "id": "https://api.weather.gov/points/41.8214,-103.6845",
+    "id": "https://api.weather.gov/points/42.5749,-114.4798",
     "type": "Feature",
     "geometry": {
         "type": "Point",
         "coordinates": [
-            -103.6845,
-            41.8214
+            -114.4798,
+            42.5749
         ]
     },
     "properties": {
-        "@id": "https://api.weather.gov/points/41.8214,-103.6845",
+        "@id": "https://api.weather.gov/points/42.5749,-114.4798",
         "@type": "wx:Point",
-        "cwa": "CYS",
-        "forecastOffice": "https://api.weather.gov/offices/CYS",
-        "gridId": "CYS",
-        "gridX": 150,
-        "gridY": 42,
-        "forecast": "https://api.weather.gov/gridpoints/CYS/150,42/forecast",
-        "forecastHourly": "https://api.weather.gov/gridpoints/CYS/150,42/forecast/hourly",
-        "forecastGridData": "https://api.weather.gov/gridpoints/CYS/150,42",
-        "observationStations": "https://api.weather.gov/gridpoints/CYS/150,42/stations",
+        "cwa": "BOI",
+        "forecastOffice": "https://api.weather.gov/offices/BOI",
+        "gridId": "BOI",
+        "gridX": 184,
+        "gridY": 30,
+        "forecast": "https://api.weather.gov/gridpoints/BOI/184,30/forecast",
+        "forecastHourly": "https://api.weather.gov/gridpoints/BOI/184,30/forecast/hourly",
+        "forecastGridData": "https://api.weather.gov/gridpoints/BOI/184,30",
+        "observationStations": "https://api.weather.gov/gridpoints/BOI/184,30/stations",
         "relativeLocation": {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    -103.664865,
-                    41.827518
+                    -114.464073,
+                    42.563123
                 ]
             },
             "properties": {
-                "city": "Gering",
-                "state": "NE",
+                "city": "Twin Falls",
+                "state": "ID",
                 "distance": {
                     "unitCode": "wmoUnit:m",
-                    "value": 1763.4869340721
+                    "value": 1836.7350106385
                 },
                 "bearing": {
                     "unitCode": "wmoUnit:degree_(angle)",
-                    "value": 247
+                    "value": 315
                 }
             }
         },
-        "forecastZone": "https://api.weather.gov/zones/forecast/NEZ019",
-        "county": "https://api.weather.gov/zones/county/NEC157",
-        "fireWeatherZone": "https://api.weather.gov/zones/fire/NEZ436",
-        "timeZone": "America/Denver",
-        "radarStation": "KCYS"
+        "forecastZone": "https://api.weather.gov/zones/forecast/IDZ016",
+        "county": "https://api.weather.gov/zones/county/IDC083",
+        "fireWeatherZone": "https://api.weather.gov/zones/fire/IDZ426",
+        "timeZone": "America/Boise",
+        "radarStation": "KSFX"
     }
 }
