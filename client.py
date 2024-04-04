@@ -76,10 +76,10 @@ def interpolate(lats, lons, datetimes, update_func=False): #could also be timest
 if __name__ == "__main__":
 
     print("in client main")
-    datetime_list = [datetime(2024, 3, 23, 12, 56, 19, 273221),
-                     datetime(2024, 3, 24, 12, 56, 19, 273221),
-                     datetime(2024, 3, 25, 12, 56, 19, 273221),
-                     datetime(2024, 3, 26, 12, 56, 19, 273221)]
+    datetime_list = [datetime(2024, 4, 5, 6, 56, 19, 273221),  # year, month, day, hour, minute, second, microsecond,
+                     datetime(2024, 4, 6, 12, 56, 19, 273221),
+                     datetime(2024, 4, 7, 12, 56, 19, 273221),
+                     datetime(2024, 4, 10, 15, 56, 19, 273221)]
 
     # timestamps = []
     # for datetime in datetime_list:

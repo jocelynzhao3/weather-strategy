@@ -215,7 +215,7 @@ def start_server():
     print("Server listening on port 8888...")
 
     # route_file_name = "2022_C_tester.csv"  #make constant or change as needed?
-    route_file_name = "FULL_race_tester.csv"
+    route_file_name = "2022_E_tester.csv"
     interp_obj = SolarInterpolator(route_file_name)
 
     # while not accepted client:
