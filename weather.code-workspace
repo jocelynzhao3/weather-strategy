@@ -1,0 +1,27 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "SSH FS - athena-3",
+			"uri": "ssh://athena-3/afs/athena.mit.edu/user/j/j/jjz300"
+		}
+	],
+	"settings": {
+		"sshfs.configs": [
+			{
+				"name": "athena-1"
+			},
+			{
+				"name": "athena-2"
+			},
+			{
+				"name": "athena-3",
+				"host": "athena.dialup.mit.edu",
+				"root": "~/",
+				"username": "jjz300"
+			}
+		]
+	}
+}

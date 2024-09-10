@@ -42,53 +42,53 @@
             }
         }
     ],
-    "id": "https://api.weather.gov/points/42.5749,-114.4798",
+    "id": "https://api.weather.gov/points/42.8631,-106.333",
     "type": "Feature",
     "geometry": {
         "type": "Point",
         "coordinates": [
-            -114.4798,
-            42.5749
+            -106.333,
+            42.8631
         ]
     },
     "properties": {
-        "@id": "https://api.weather.gov/points/42.5749,-114.4798",
+        "@id": "https://api.weather.gov/points/42.8631,-106.333",
         "@type": "wx:Point",
-        "cwa": "BOI",
-        "forecastOffice": "https://api.weather.gov/offices/BOI",
-        "gridId": "BOI",
-        "gridX": 184,
-        "gridY": 30,
-        "forecast": "https://api.weather.gov/gridpoints/BOI/184,30/forecast",
-        "forecastHourly": "https://api.weather.gov/gridpoints/BOI/184,30/forecast/hourly",
-        "forecastGridData": "https://api.weather.gov/gridpoints/BOI/184,30",
-        "observationStations": "https://api.weather.gov/gridpoints/BOI/184,30/stations",
+        "cwa": "RIW",
+        "forecastOffice": "https://api.weather.gov/offices/RIW",
+        "gridId": "RIW",
+        "gridX": 187,
+        "gridY": 96,
+        "forecast": "https://api.weather.gov/gridpoints/RIW/187,96/forecast",
+        "forecastHourly": "https://api.weather.gov/gridpoints/RIW/187,96/forecast/hourly",
+        "forecastGridData": "https://api.weather.gov/gridpoints/RIW/187,96",
+        "observationStations": "https://api.weather.gov/gridpoints/RIW/187,96/stations",
         "relativeLocation": {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    -114.464073,
-                    42.563123
+                    -106.32058,
+                    42.8436499
                 ]
             },
             "properties": {
-                "city": "Twin Falls",
-                "state": "ID",
+                "city": "Casper",
+                "state": "WY",
                 "distance": {
                     "unitCode": "wmoUnit:m",
-                    "value": 1836.7350106385
+                    "value": 2387.9995341529
                 },
                 "bearing": {
                     "unitCode": "wmoUnit:degree_(angle)",
-                    "value": 315
+                    "value": 334
                 }
             }
         },
-        "forecastZone": "https://api.weather.gov/zones/forecast/IDZ016",
-        "county": "https://api.weather.gov/zones/county/IDC083",
-        "fireWeatherZone": "https://api.weather.gov/zones/fire/IDZ426",
-        "timeZone": "America/Boise",
-        "radarStation": "KSFX"
+        "forecastZone": "https://api.weather.gov/zones/forecast/WYZ020",
+        "county": "https://api.weather.gov/zones/county/WYC025",
+        "fireWeatherZone": "https://api.weather.gov/zones/fire/WYZ280",
+        "timeZone": "America/Denver",
+        "radarStation": "KRIW"
     }
 }
